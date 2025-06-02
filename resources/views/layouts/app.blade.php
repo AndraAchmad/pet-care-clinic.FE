@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <style>
+.navbar .navbar-brand span {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #29421D;
+}
+
+.navbar .nav-link {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #29421D !important;
+}
+</style>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <title>Pet Care Clinic</title>
 
@@ -11,18 +28,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="{{ asset('css/petcare-layout.css') }}">
+    <link rel="stylesheet" href="{{ asset('C:\laragon\www\pet-care-clinic\resources\css\layout-petcare.css') }}">
 
     <!-- Google Fonts: Sora -->
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body style="font-family: 'Sora', sans-serif;">
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+
+
+
+<body class="d-flex flex-column min-vh-100" style="font-family: 'Sora', sans-serif;">
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg" style="background-color: #D3EE98;">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
-                <img src="/images/logo.svg" alt="Pet Care Logo" style="height: 40px; margin-right: 10px;">
+                <img src="\images\logo.png" alt="Pet Care Logo" style="height: 40px; margin-right: 10px;">
                 <span class="fw-bold" style="font-size: 1.5rem; color: #29421D;">Pet Care Clinic</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -59,20 +83,21 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="d-flex" style="height: 80vh; background-color: #3AA209;">
-        <div class="col-md-6 p-0">
-            <img src="/images/hero-dog.jpg" alt="Hero Dog" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
-        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center text-white px-4">
-            <p style="font-size: 1rem;">All kinds of care for all kinds of pets</p>
-            <h1 style="font-size: 2.5rem; font-weight: 700;">Pet Care Clinic</h1>
-           <a href="{{ route('download') }}" class="btn mt-3" style="background-color: #FEFF9F; color: #29421D; font-weight: 600;">Download Now</a>
-
-        </div>
-    </section>
+@if (Request::routeIs('home'))
+<section class="d-flex" style="height: 80vh; background-color: #3AA209;">
+    <div class="col-md-6 p-0">
+        <img src="\images\background.png" alt="Hero Dog" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center text-white px-4">
+        <p style="font-size: 1rem;">All kinds of care for all kinds of pets</p>
+        <h1 style="font-size: 2.5rem; font-weight: 700;">Pet Care Clinic</h1>
+       <a href="{{ route('download') }}" class="btn mt-3" style="background-color: #FEFF9F; color: #29421D; font-weight: 600;">Download Now</a>
+    </div>
+</section>
+@endif
 
     <!-- Page Content -->
-    <main class="container my-5">
+    <main class="container my-5 flex-fill">
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}

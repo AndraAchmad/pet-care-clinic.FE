@@ -27,7 +27,7 @@
         .logo {
             display: block;
             margin: 0 auto 1rem auto;
-            width: 80px;
+            width: 200px;
         }
         footer {
             background-color: #FEFF9F;
@@ -49,7 +49,7 @@
 <body>
 
 <div class="d-flex flex-column align-items-center justify-content-center flex-grow-1">
-    <img src="/images/logo.svg" alt="Pet Care Clinic Logo" class="logo">
+    <img src="\images\logo-black.png" alt="Pet Care Clinic Logo" class="logo">
     <div class="form-container">
         <h3 class="text-center mb-3" style="color: #A98537;">Welcome!</h3>
         <form method="POST" action="{{ route('register') }}">
@@ -71,8 +71,9 @@
             </div>
             <button type="submit" class="btn btn-success w-100 fw-bold">Register</button>
         </form>
+
         <div class="text-center mt-3">
-            <a href="{{ route('login') }}" class="text-decoration-none" style="color: #29421D;">Already have an account? Login here</a>
+            <a href="{{ route('login') }}" class="text-decoration-none" style="color: #29421D;">Sudah punya akun? Login di sini</a>
         </div>
     </div>
 </div>

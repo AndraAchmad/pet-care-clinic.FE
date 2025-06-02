@@ -7,6 +7,14 @@ use App\Http\Controllers\Admin\AuthController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\ProfileController;
+
+// Profile routes
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile/edit', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/profile/edit/password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
+    Route::post('/profile/edit/photo', [ProfileController::class, 'updatePhoto'])->name('profile.photo');
 
 // Public download page
 Route::get('/download', function () {
@@ -32,8 +40,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
-Route::post('/register', [RegisteredUserController::class, 'store']);
 require __DIR__.'/auth.php';
 // ✅ Landing Page Routes
 Route::get('/', function () {
@@ -52,9 +58,6 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/profile/edit', function () {
-    return 'Profile Edit Page (coming soon)';
-})->name('profile.edit');
 
 // ✅ Auth Routes (dari Breeze otomatis terdaftar)
 
