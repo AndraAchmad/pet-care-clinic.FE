@@ -42,24 +42,67 @@
             font-size: 0.9rem;
             color: #29421D;
         }
+        .floating-back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(255, 255, 255, 0.6);
+    color: #29421D;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 9999;
+
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: fadeSlideIn 1s ease forwards;
+}
+
+.floating-back-btn:hover {
+    background-color: rgba(114, 191, 120, 0.8);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+@keyframes fadeSlideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
     </style>
 </head>
+<!-- Floating Back Button -->
+<a href="/" class="floating-back-btn d-flex align-items-center">
+    <span style="font-size:1.3rem; margin-right:6px;">←</span> Home
+</a>
+
 <body>
+    
     <div class="content">
-        <img src="\images\image.png" alt="Cute Pet Illustration" class="illustration" style="height:100px;">
-        <h1>Download Our App</h1>
-        <p class="mb-4">Thank you for choosing Pet Care Clinic!  
-        Get our app for the best pet care experience anytime, anywhere.</p>
-        
-        <div>
-            <a href="#" class="btn-store">
-                <img src="\images\[CITYPNG.COM]FREE Google Play PlayStore Logo PNG - 2000x2000.png" alt="Download on Google Play" style="height:100px;">
-            </a>
-            <a href="#" class="btn-store">
-                <img src="\images\[CITYPNG.COM]Download Black Apple App Store Icon PNG - 1600x1600.png" alt="Download on App Store" style="height:100px;">
-            </a>
-        </div>
+    <img src="\images\image.png" alt="Cute Pet Illustration" class="illustration" style="height:100px;">
+    <h1>Download Our App</h1>
+    <p class="mb-4">Thank you for choosing Pet Care Clinic!  
+    Get our app for the best pet care experience anytime, anywhere.</p>
+
+    <div>
+        <a href="#" class="btn-store">
+            <img src="\images\[CITYPNG.COM]FREE Google Play PlayStore Logo PNG - 2000x2000.png" alt="Download on Google Play" style="height:100px;">
+        </a>
+        <a href="#" class="btn-store">
+            <img src="\images\[CITYPNG.COM]Download Black Apple App Store Icon PNG - 1600x1600.png" alt="Download on App Store" style="height:100px;">
+        </a>
     </div>
+
+  
+
+</div>
+
 <style>
 .fancy-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;

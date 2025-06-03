@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title>Pet Care Clinic</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('C:\laragon\www\pet-care-clinic\resources\css\layout-petcare.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         html, body {
@@ -17,10 +16,28 @@
         }
         .navbar {
             background-color: #D3EE98;
+            padding: 1rem 2rem; /* lebih lega */
         }
-        .navbar-brand, .nav-link {
+        .brand-logo {
+            height: 70px; /* diperbesar */
+            width: auto;
+            margin-right: 15px;
+        }
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+            color: #29421D;
+        }
+        .brand-line {
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+        .navbar-nav .nav-link {
+            font-size: 1.2rem; /* diperbesar */
+            font-weight: 700;
             color: #29421D !important;
-            font-weight: 600;
+            margin-left: 1.8rem; /* jarak diperluas */
         }
         main {
             flex: 1;
@@ -43,7 +60,7 @@
         }
         .hero-text h1 {
             font-size: 3rem;
-            font-weight: 700;
+            font-weight: 800;
         }
         .btn-download {
             background-color: #FEFF9F;
@@ -71,25 +88,33 @@
 <body>
 
 <nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ Auth::check() ? '/dashboard' : '/' }}">
-            <img src="\images\logo.png" alt="Pet Care Logo" style="height: 40px; margin-right: 10px;">
-            Pet Care Clinic
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <!-- Logo & Brand -->
+        <a class="navbar-brand d-flex align-items-center me-auto" href="{{ Auth::check() ? '/dashboard' : '/' }}">
+            <img src="{{ asset('images/logo.png') }}" alt="Pet Care Logo" class="brand-logo">
+            <div class="brand-text">
+                <div class="brand-line">Pet Care</div>
+                <div class="brand-line">Clinic</div>
+            </div>
         </a>
+
+        <!-- Hamburger -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Right-side Menu -->
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav align-items-center">
                 <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
                 <li class="nav-item"><a class="nav-link" href="/services">Our Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
 
                 @guest
-                    <li class="nav-item"><a class="btn btn-outline-dark me-2" href="/login">Login</a></li>
-                    <li class="nav-item"><a class="btn btn-success" href="/register">Register</a></li>
+                    <li class="nav-item"><a class="btn btn-outline-dark ms-3" href="/login">Login</a></li>
+                    <li class="nav-item"><a class="btn btn-success ms-2" href="/register">Register</a></li>
                 @else
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown ms-3">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             Hi, {{ Auth::user()->name }}
                         </a>
@@ -102,9 +127,6 @@
                                 </form>
                             </li>
                         </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/dashboard" class="btn btn-sm btn-success ms-2">Dashboard</a>
                     </li>
                 @endguest
             </ul>
@@ -126,5 +148,22 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: "{{ session('success') }}",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading()
+        },
+    });
+</script>
+@endif
+
 </body>
 </html>

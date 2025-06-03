@@ -2,6 +2,26 @@
 
 @section('content')
 <div class="container py-5" style="max-width: 800px;">
+    {{-- Success Messages --}}
+    @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+
     <div class="text-center mb-4">
         <img src="{{ Auth::user()->profile_photo_url }}" 
              alt="Profile Photo" 
@@ -60,19 +80,36 @@
                     @method('PUT')
 
                     <div class="mb-3">
-                        <label for="current_password" class="form-label">Current Password</label>
-                        <input type="password" name="current_password" class="form-control" required>
-                    </div>
+    <label for="current_password" class="form-label">Current Password</label>
+    <div class="input-group">
+        <input type="password" id="current_password" name="current_password" class="form-control" required>
+        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('current_password', this)">
+            <i class="fa fa-eye"></i>
+        </button>
+    </div>
+</div>
 
-                    <div class="mb-3">
-                        <label for="password" class="form-label">New Password</label>
-                        <input type="password" name="password" class="form-control" required>
-                    </div>
+<div class="mb-3">
+    <label for="password" class="form-label">New Password</label>
+    <div class="input-group">
+        <input type="password" id="password" name="password" class="form-control" required>
+        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password', this)">
+            <i class="fa fa-eye"></i>
+        </button>
+    </div>
+</div>
 
-                    <div class="mb-3">
-                        <label for="password_confirmation" class="form-label">Confirm New Password</label>
-                        <input type="password" name="password_confirmation" class="form-control" required>
-                    </div>
+<div class="mb-3">
+    <label for="password_confirmation" class="form-label">Confirm New Password</label>
+    <div class="input-group">
+        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
+        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password_confirmation', this)">
+            <i class="fa fa-eye"></i>
+        </button>
+    </div>
+</div>
+
+
 
                     <button type="submit" class="btn btn-warning">Change Password</button>
                 </form>
@@ -80,11 +117,16 @@
         </div>
     </div>
 
-    <div class="text-center">
+    <div class="d-flex justify-content-between">
         <form method="POST" action="{{ route('profile.destroy') }}">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-outline-danger">Delete Account</button>
+        </form>
+
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="btn btn-outline-secondary">Logout</button>
         </form>
     </div>
 </div>

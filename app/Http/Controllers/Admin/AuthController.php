@@ -13,16 +13,22 @@ class AuthController extends Controller
         return view('admin.login');
     }
 
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
+   public function login(Request $request)
+{
+    $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->intended('/dashboard');
+    if (Auth::attempt($credentials)) {
+        if (Auth::user()->role === 'admin') {
+            return redirect()->intended('/admin/dashboard');
+        } else {
+            Auth::logout();
+            return back()->withErrors(['email' => 'Access denied'])->withInput();
         }
-
-        return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
     }
+
+    return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
+}
+
 
     public function logout()
     {

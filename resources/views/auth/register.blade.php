@@ -62,18 +62,32 @@
                 <input type="email" name="email" class="form-control" placeholder="Email address" value="{{ old('email') }}" required>
                 @error('email') <small class="text-danger">{{ $message }}</small> @enderror
             </div>
-            <div class="mb-3">
-                <input type="password" name="password" class="form-control" placeholder="Password" required>
-                @error('password') <small class="text-danger">{{ $message }}</small> @enderror
-            </div>
-            <div class="mb-3">
-                <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
-            </div>
+           <div class="mb-3 position-relative">
+            <input type="password" name="password" class="form-control" placeholder="Password" id="password" required>
+            <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('password', this)">
+                👁️
+            </span>
+            @error('password') <small class="text-danger">{{ $message }}</small> @enderror
+        </div>
+
+        <div class="mb-3 position-relative">
+            <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" id="password_confirmation" required>
+            <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('password_confirmation', this)">
+                👁️
+            </span>
+        </div>
+
             <button type="submit" class="btn btn-success w-100 fw-bold">Register</button>
         </form>
 
         <div class="text-center mt-3">
-            <a href="{{ route('login') }}" class="text-decoration-none" style="color: #29421D;">Sudah punya akun? Login di sini</a>
+    Sudah punya akun? 
+    <a href="{{ route('login') }}" class="text-decoration-none" style="color: #0d6efd; font-weight: 600;">
+        Login di sini
+    </a>
+</div>
+
+
         </div>
     </div>
 </div>
@@ -81,7 +95,39 @@
 <footer>
     © 2024 Pet Care Clinic. All Rights Reserved
 </footer>
-
+<script>
+function togglePassword(fieldId, icon) {
+    const input = document.getElementById(fieldId);
+    icon.classList.add('rotate');
+    setTimeout(() => {
+        if (input.type === "password") {
+            input.type = "text";
+            icon.textContent = "🙈";
+        } else {
+            input.type = "password";
+            icon.textContent = "👁️";
+        }
+        icon.classList.remove('rotate');
+    }, 150);
+}
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: "{{ session('success') }}",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading()
+        },
+    });
+</script>
+@endif
+
+
 </body>
 </html>

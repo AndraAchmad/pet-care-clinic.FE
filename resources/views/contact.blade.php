@@ -29,18 +29,19 @@
             <div class="col-md-6 mb-4">
                 <div class="p-4 bg-light rounded shadow-sm fancy-card h-100">
                     <h5 class="fw-bold mb-3 text-center">Send Us a Message</h5>
-                    <form>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Your Name">
-                        </div>
-                        <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Your Email">
-                        </div>
-                        <div class="mb-3">
-                            <textarea class="form-control" rows="4" placeholder="Your Message"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-success w-100 fancy-button">Send Message</button>
-                    </form>
+                    <form id="contactForm">
+    <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Your Name" required>
+    </div>
+    <div class="mb-3">
+        <input type="email" class="form-control" placeholder="Your Email" required>
+    </div>
+    <div class="mb-3">
+        <textarea class="form-control" rows="4" placeholder="Your Message" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-success w-100 fancy-button">Send Message</button>
+</form>
+
                 </div>
             </div>
         </div>
